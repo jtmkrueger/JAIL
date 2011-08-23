@@ -205,6 +205,24 @@
 						triggerEl.unbind( options.event, $.asynchImageLoader._bufferedEventListener );
 					}
 				}
+		  
+			} else if (options.event === 'dragstop' || options.selector) {
+				var triggerEl = images.data('triggerEl');
+
+				if(images.length > 0) {
+
+					// Bind the event to the selector specified in the config obj
+					triggerEl.bind( options.event, { images:images, options:options }, $.asynchImageLoader._bufferedEventListener );
+
+					if (options.event === 'dragstop' || !options.selector) {
+						$window.resize({ images:images, options:options }, $.asynchImageLoader._bufferedEventListener );
+					}
+					return;
+				} else {
+					if (!!triggerEl) {
+						triggerEl.unbind( options.event, $.asynchImageLoader._bufferedEventListener );
+					}
+				}
 			} else {
 				// Bind the event to the images
 				images.bind(options.event, { options:options, images:images }, $.asynchImageLoader._loadOnEvent);
@@ -245,6 +263,11 @@
 
 				if (options.event === 'load+scroll') {
 					options.event = 'scroll';
+					$.asynchImageLoader.onEvent( options, images );
+				}
+				
+				if (options.event === 'load+dragstop') {
+					options.event = 'dragstop';
 					$.asynchImageLoader.onEvent( options, images );
 				}
 			}, options.timeout);
