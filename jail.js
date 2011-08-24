@@ -303,6 +303,11 @@
 				img_offset = $img.offset(),
 				img_width = $img.width(),
 				img_height = $img.height();
+
+				//console.log("ct_offset: " + ct_offset);
+				//console.log("ct_left: " + ct_left);
+				//console.log("ct_right: " + ct_right);
+				//console.log("img_offset.left: " + img_offset.left);
 			
 			return (ct_top - optionOffset) <= (img_offset.top + img_height) &&
 				(ct_bottom + optionOffset) >= img_offset.top &&
@@ -312,10 +317,11 @@
 
 		// Main function --> Load the images copying the "data-href" attribute into the "src" attribute
 		_loadImage : function(options, $img) {
-
-			$img.hide();
-			$img.attr("src", $img.attr("data-href"));
-			$img.removeAttr('data-href');
+			if ($img.css('display') != 'none') {
+				$img.hide();
+				$img.attr("src", $img.attr("data-href"));
+				$img.removeAttr('data-href');
+			};
 
 			// Images loaded with some effect if existing
 			if(options.effect) {
