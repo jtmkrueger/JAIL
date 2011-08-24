@@ -321,18 +321,18 @@
 				$img.hide();
 				$img.attr("src", $img.attr("data-href"));
 				$img.removeAttr('data-href');
-			};
 
-			// Images loaded with some effect if existing
-			if(options.effect) {
-				if (options.speed) {
-					$img[options.effect](options.speed);
+				// Images loaded with some effect if existing
+				if(options.effect) {
+					if (options.speed) {
+						$img[options.effect](options.speed);
+					} else {
+						$img[options.effect]();
+					}
 				} else {
-					$img[options.effect]();
+					$img.show();
 				}
-			} else {
-				$img.show();
-			}
+			};
 			
 			// Callback after each image is loaded
 			options.callbackAfterEachImage.call(this, $img, options);
