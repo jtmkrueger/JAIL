@@ -1,3 +1,6 @@
+This fork adds a load+dragstop event for use with jquery ui and also has a fix (albeit somewhat hackey) for hidden images not loading asynch.
+
+
 # jQuery Asynchronous Image Loader (JAIL)
 
 JAIL helps loading images asynchronously and it can be used to make your page load faster. 
